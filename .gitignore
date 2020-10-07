@@ -1,0 +1,4 @@
+.env
+key.pem
+key.ppk
+node_modules

@@ -1,0 +1,1 @@
+export const MENU_TOGGLE_ACTIVE = "MENU_TOGGLE_ACTIVE";
