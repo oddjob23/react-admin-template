@@ -1149,7 +1149,7 @@ const VerticalMenu = ({ location }) => {
                   </li>
                   <li
                     key={category.id + Math.random() * 2342 + index}
-                    className={category.active ? "mm-active" : ""}
+                    className={` ${category.active ? "mm-active" : ""}`}
                   >
                     {category.items.map((innerItem) => (
                       <>
@@ -1157,7 +1157,7 @@ const VerticalMenu = ({ location }) => {
                           <>
                             <a
                               href="#"
-                              className={`with-arrow ${
+                              className={`hoverable with-arrow waves-effect ${
                                 innerItem.active ? "mm-active" : ""
                               }`}
                               aria-expanded="false"
