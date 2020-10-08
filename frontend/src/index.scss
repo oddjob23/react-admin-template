@@ -3,8 +3,9 @@
 @import "../node_modules/simplebar/src/simplebar.css";
 
 @import "./vertialMenu";
-html {
-  min-height: 100%;
+html,
+body {
+  height: 100%;
 }
 *::before,
 *::after,
@@ -63,6 +64,7 @@ body {
   &[data-sidebar="light"] {
     .vertical-menu {
       background: #fff;
+      height: 100%;
       #sidebar-menu ul li a:hover {
         color: #383c40;
       }
@@ -70,11 +72,14 @@ body {
   }
   &[data-sidebar="dark"] {
     .vertical-menu {
-      background: $bg-dark;
+      .simplebar-content {
+        background-color: $bg-dark;
+      }
       .mm-active {
         color: #fff !important;
       }
     }
+
     #sidebar-menu ul li a {
       color: $sidebar-dark-menu-item-color;
     }

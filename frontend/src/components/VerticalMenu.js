@@ -1137,7 +1137,7 @@ const VerticalMenu = ({ location }) => {
   ]);
 
   return (
-    <aside className="vertical-menu">
+    <aside className="vertical-menu h-80">
       <div className="h-100">
         <SimpleBarReact style={{ maxHeight: "100%" }}>
           <div id="sidebar-menu">
@@ -1147,208 +1147,207 @@ const VerticalMenu = ({ location }) => {
                   <li key={index} className="menu-title">
                     {category.label}
                   </li>
-                  <li
+                  {/* <li
                     key={category.id + Math.random() * 2342 + index}
                     className={` ${category.active ? "mm-active" : ""}`}
-                  >
-                    {category.items.map((innerItem) => (
-                      <>
-                        {innerItem.submenu.length > 0 ? (
-                          <>
-                            <a
-                              href="#"
-                              className={`hoverable with-arrow waves-effect ${
-                                innerItem.active ? "mm-active" : ""
-                              }`}
-                              aria-expanded="false"
-                              ref={innerItem.ref}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                try {
-                                  innerItem.ref.current.nextSibling.classList.toggle(
-                                    "mm-show"
-                                  );
-                                  innerItem.ref.current.classList.toggle(
-                                    "mm-active"
-                                  );
-                                } catch {}
-                                setMenuLinks((state) => {
-                                  // loop through the current state
-                                  const links = state.map((el) => {
-                                    // el === category
-                                    el.items.map((item) => {
-                                      if (item.id === innerItem.id) {
-                                        item.active = !innerItem.active;
-                                        console.log(item);
-                                      } else {
-                                        item.active = false;
-                                      }
-                                      return item;
-                                    });
-                                    return el;
+                  > */}
+                  {category.items.map((innerItem) => (
+                    <>
+                      {innerItem.submenu.length > 0 ? (
+                        <li
+                          className={`hoverable ${
+                            category.active ? "mm-active" : ""
+                          }`}
+                        >
+                          <a
+                            href="#"
+                            className={` with-arrow waves-effect ${
+                              innerItem.active ? "mm-active" : ""
+                            }`}
+                            aria-expanded="false"
+                            ref={innerItem.ref}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              try {
+                                innerItem.ref.current.nextSibling.classList.toggle(
+                                  "mm-show"
+                                );
+                                innerItem.ref.current.classList.toggle(
+                                  "mm-active"
+                                );
+                              } catch {}
+                              setMenuLinks((state) => {
+                                // loop through the current state
+                                const links = state.map((el) => {
+                                  // el === category
+                                  el.items.map((item) => {
+                                    if (item.id === innerItem.id) {
+                                      item.active = !innerItem.active;
+                                      console.log(item);
+                                    } else {
+                                      item.active = false;
+                                    }
+                                    return item;
                                   });
-                                  return links;
+                                  return el;
                                 });
-                              }}
-                            >
-                              <span className="inner-icon">
-                                {innerItem.icon}{" "}
+                                return links;
+                              });
+                            }}
+                          >
+                            <span className="inner-icon">
+                              {innerItem.icon}{" "}
+                            </span>
+                            <span> {innerItem.label} </span>
+                            {innerItem.hasArrow && (
+                              <span className="arrow">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="black"
+                                  width="18px"
+                                  height="18px"
+                                >
+                                  <path d="M0 0h24v24H0z" fill="none" />
+                                  <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
+                                </svg>
                               </span>
-                              <span> {innerItem.label} </span>
-                              {innerItem.hasArrow && (
-                                <span className="arrow">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="black"
-                                    width="18px"
-                                    height="18px"
-                                  >
-                                    <path d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-                                  </svg>
-                                </span>
-                              )}
-                            </a>
+                            )}
+                          </a>
 
-                            <ul
-                              className={`sub-menu mm-collapse ${
-                                innerItem.active ? "mm-show" : ""
-                              }`}
-                              aria-expanded="false"
-                            >
-                              {innerItem.submenu.map((el, index) => (
-                                <>
-                                  {!el.submenu ? (
-                                    <li
-                                      className={
-                                        el.active && innerItem.active
-                                          ? "mm-active"
-                                          : ""
-                                      }
+                          <ul
+                            className={`sub-menu mm-collapse ${
+                              innerItem.active ? "mm-show" : ""
+                            }`}
+                            aria-expanded="false"
+                          >
+                            {innerItem.submenu.map((el, index) => (
+                              <>
+                                {!el.submenu ? (
+                                  <li
+                                    className={
+                                      el.active && innerItem.active
+                                        ? "mm-active"
+                                        : ""
+                                    }
+                                  >
+                                    <NavLink
+                                      to={`${el.link}`}
+                                      activeClassName="mm-active"
                                     >
-                                      <NavLink
-                                        to={`${el.link}`}
-                                        activeClassName="mm-active"
+                                      {el.label}
+                                    </NavLink>
+                                  </li>
+                                ) : (
+                                  <>
+                                    {el.submenu.length > 0 && (
+                                      <li
+                                        className={
+                                          el.active && innerItem.active
+                                            ? "mm-active"
+                                            : ""
+                                        }
                                       >
-                                        {el.label}
-                                      </NavLink>
-                                    </li>
-                                  ) : (
-                                    <>
-                                      {el.submenu.length > 0 && (
-                                        <li
-                                          className={
-                                            el.active && innerItem.active
-                                              ? "mm-active"
-                                              : ""
-                                          }
-                                        >
-                                          <a
-                                            href="#"
-                                            className={`with-arrow ${
-                                              el.active ? "mm-active" : ""
-                                            }`}
-                                            aria-expanded="false"
-                                            ref={el.ref}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              try {
-                                                el.ref.current.nextSibling.classList.toggle(
-                                                  "mm-show"
-                                                );
-                                                el.ref.current.classList.toggle(
-                                                  "mm-active"
-                                                );
-                                              } catch {}
-                                              setMenuLinks((state) => {
-                                                // loop through the current state
-                                                const links = state.map(
-                                                  (el) => {
-                                                    // el === category
-                                                    el.items.map((b) => {
-                                                      if (b.submenu) {
-                                                        b.submenu.map((x) => {
-                                                          if (x.submenu) {
-                                                            x.submenu.map(
-                                                              (e) => {
-                                                                if (
-                                                                  x.id === e.id
-                                                                ) {
-                                                                  x.active = !x.active;
-                                                                }
-                                                              }
-                                                            );
+                                        <a
+                                          href="#"
+                                          className={`with-arrow ${
+                                            el.active ? "mm-active" : ""
+                                          }`}
+                                          aria-expanded="false"
+                                          ref={el.ref}
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            try {
+                                              el.ref.current.nextSibling.classList.toggle(
+                                                "mm-show"
+                                              );
+                                              el.ref.current.classList.toggle(
+                                                "mm-active"
+                                              );
+                                            } catch {}
+                                            setMenuLinks((state) => {
+                                              // loop through the current state
+                                              const links = state.map((el) => {
+                                                // el === category
+                                                el.items.map((b) => {
+                                                  if (b.submenu) {
+                                                    b.submenu.map((x) => {
+                                                      if (x.submenu) {
+                                                        x.submenu.map((e) => {
+                                                          if (x.id === e.id) {
+                                                            x.active = !x.active;
                                                           }
                                                         });
                                                       }
-                                                      return b;
                                                     });
-
-                                                    return el;
                                                   }
-                                                );
-                                                return links;
+                                                  return b;
+                                                });
+
+                                                return el;
                                               });
-                                            }}
-                                          >
-                                            {" "}
-                                            {el.label}{" "}
-                                            {el.hasArrow && (
-                                              <span className="arrow">
-                                                <svg
-                                                  xmlns="http://www.w3.org/2000/svg"
-                                                  viewBox="0 0 24 24"
-                                                  fill="black"
-                                                  width="18px"
-                                                  height="18px"
-                                                >
-                                                  <path
-                                                    d="M0 0h24v24H0z"
-                                                    fill="none"
-                                                  />
-                                                  <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-                                                </svg>
-                                              </span>
-                                            )}
-                                          </a>
-                                          {el.submenu.length > 0 && (
-                                            <ul
-                                              className={`sub-menu mm-collapse ${
-                                                el.active ? "mm-show" : ""
-                                              }`}
-                                            >
-                                              {el.submenu.map(
-                                                (submenuItem, index) => (
-                                                  <li
-                                                    key={index}
-                                                    className={
-                                                      submenuItem.active &&
-                                                      innerItem.active
-                                                        ? "mm-active"
-                                                        : ""
-                                                    }
-                                                  >
-                                                    <NavLink
-                                                      to={submenuItem.link}
-                                                      activeClassName="mm-active"
-                                                    >
-                                                      {submenuItem.label}
-                                                    </NavLink>
-                                                  </li>
-                                                )
-                                              )}
-                                            </ul>
+                                              return links;
+                                            });
+                                          }}
+                                        >
+                                          {" "}
+                                          {el.label}{" "}
+                                          {el.hasArrow && (
+                                            <span className="arrow">
+                                              <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="black"
+                                                width="18px"
+                                                height="18px"
+                                              >
+                                                <path
+                                                  d="M0 0h24v24H0z"
+                                                  fill="none"
+                                                />
+                                                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
+                                              </svg>
+                                            </span>
                                           )}
-                                        </li>
-                                      )}
-                                    </>
-                                  )}
-                                </>
-                              ))}
-                            </ul>
-                          </>
-                        ) : (
+                                        </a>
+                                        {el.submenu.length > 0 && (
+                                          <ul
+                                            className={`sub-menu mm-collapse ${
+                                              el.active ? "mm-show" : ""
+                                            }`}
+                                          >
+                                            {el.submenu.map(
+                                              (submenuItem, index) => (
+                                                <li
+                                                  key={index}
+                                                  className={
+                                                    submenuItem.active &&
+                                                    innerItem.active
+                                                      ? "mm-active"
+                                                      : ""
+                                                  }
+                                                >
+                                                  <NavLink
+                                                    to={submenuItem.link}
+                                                    activeClassName="mm-active"
+                                                  >
+                                                    {submenuItem.label}
+                                                  </NavLink>
+                                                </li>
+                                              )
+                                            )}
+                                          </ul>
+                                        )}
+                                      </li>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            ))}
+                          </ul>
+                        </li>
+                      ) : (
+                        <li>
                           <NavLink
                             to={innerItem.link}
                             ref={innerItem.ref}
@@ -1359,10 +1358,11 @@ const VerticalMenu = ({ location }) => {
                             </span>
                             <span> {innerItem.label} </span>
                           </NavLink>
-                        )}
-                      </>
-                    ))}
-                  </li>
+                        </li>
+                      )}
+                    </>
+                  ))}
+                  {/* </li> */}
                 </>
               ))}
             </ul>

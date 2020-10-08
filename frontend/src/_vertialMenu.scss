@@ -237,7 +237,11 @@
         .hoverable {
           position: relative;
           white-space: nowrap;
-          + ul.sub-menu {
+          padding: 0;
+          .arrow {
+            color: currentColor;
+          }
+          > ul.sub-menu {
             display: none;
             left: 70px;
             position: absolute;
@@ -246,6 +250,10 @@
             box-shadow: 3px 5px 10px 0 rgba(54, 61, 71, 0.1);
           }
           &:hover {
+            padding: 0 !important;
+            > ul.sub-menu {
+              display: block;
+            }
             background-color: lighten($sidebar-dark-bg, 2%);
             color: $white;
             width: 260px;
@@ -417,6 +425,7 @@
 
 body[data-sidebar="dark"] {
   .vertical-menu {
+    height: 100%;
     background: $sidebar-dark-bg;
   }
 
@@ -672,10 +681,34 @@ body[data-sidebar="colored"] {
   }
 }
 ul.sub-menu {
+  li a {
+    &:hover {
+      color: #fff !important;
+    }
+  }
   &:hover {
     display: block !important;
   }
 }
-ul.sub-menu:hover a {
-  display: flex;
+ul.sub-menu:hover a.hoverable {
+  display: block !important;
+  background-color: orangered !important;
+}
+
+ul.metismenu li a:hover {
+  color: $white;
+  svg,
+  span {
+    color: #fff;
+  }
+}
+a:link,
+a:visited {
+  &:hover {
+    color: #fff;
+    span,
+    svg {
+      color: #fff;
+    }
+  }
 }

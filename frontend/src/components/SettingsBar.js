@@ -135,9 +135,18 @@ const SettingsBar = () => {
       };
     });
   };
+  const closeSettingsBar = (e) => {
+    if (e.keyCode === 27) {
+      document.querySelector("body").classList.remove("settings-bar-enabled");
+    }
+  };
   useEffect(() => {
     console.log(layout);
+
     const body = document.querySelector("body");
+    if (body.classList.contains("settings-bar-enabled")) {
+      document.addEventListener("keydown", closeSettingsBar);
+    }
     if (layout.topbarTheme === "Light") {
       body.setAttribute("data-topbar", "light");
     } else {
