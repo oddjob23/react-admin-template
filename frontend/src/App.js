@@ -4,7 +4,9 @@ import Header from "./components/Header";
 import TestDashboard from "./components/TestDashboard";
 import VerticalMenu from "./components/VerticalMenu";
 import SettingsBar from "./components/SettingsBar";
+import MainContent from "./components/MainContent";
 
+import CardsPage from "./components/pages/CardsPage";
 function App() {
   return (
     <Router>
@@ -13,11 +15,13 @@ function App() {
           <Header />
           <VerticalMenu />
           <SettingsBar />
+          <MainContent>
+            <Route path="/ui-cards" component={CardsPage} />
+          </MainContent>
           <div className="settings-bar-overlay"></div>
           <Route path="/calendar">
             <h1>Test</h1>
           </Route>
-          <Route path="/" component={TestDashboard}></Route>
         </div>
       </Switch>
     </Router>

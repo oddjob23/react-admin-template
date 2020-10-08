@@ -3,7 +3,6 @@ import SimpleBar from "simplebar-react";
 import RadioSettings from "./RadioSettings";
 
 const SettingsBar = () => {
-  document.querySelector("body").classList.add("settings-bar-enabled");
   const [layout, setLayout] = useState({
     layoutWidth: "Fluid",
     typeLayout: "Vertical",
