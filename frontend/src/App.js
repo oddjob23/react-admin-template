@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  IndexRoute,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import TestDashboard from "./components/TestDashboard";
 import VerticalMenu from "./components/VerticalMenu";
@@ -18,6 +13,7 @@ function App() {
           <Header />
           <VerticalMenu />
           <SettingsBar />
+          <div className="settings-bar-overlay"></div>
           <Route path="/calendar">
             <h1>Test</h1>
           </Route>
