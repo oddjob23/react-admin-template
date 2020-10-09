@@ -8,31 +8,92 @@ import img4 from "../../images/card_image_four.jpg";
 const CardsPage = () => {
   const cards = [
     {
-      type: "default",
+      type: "layoutOne",
       img: {
         src: img,
         description: "default",
+        position: "top",
       },
+      title: "Card Title 1",
+      text:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolorem vel voluptates!",
+      button: {
+        type: "block",
+        color: "primary",
+        text: "Go somewhere",
+      },
+      cols: "col-xl-3",
     },
     {
-      type: "title-top",
+      type: "layoutTwo",
       img: {
         src: img2,
         description: "title-top",
+        position: "after-title",
       },
+      title: "Card Title 2",
+      text:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolorem vel voluptates!",
+      list: [{ text: "Item 1" }, { text: "Item 2" }],
+      links: ["Card link", "Another link"],
+      button: null,
+      cols: "col-xl-3",
     },
     {
-      type: "title-top-subtitle",
+      type: "layoutOne",
       img: {
-        src: img3,
-        description: "title-top",
+        src: img,
+        description: "default",
+        position: "top",
       },
+      title: null,
+      text:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolorem vel voluptates!",
+      button: null,
+      cols: "col-xl-3",
     },
     {
-      type: "image-top-subtitle",
+      type: "layoutFour",
       img: {
         src: img4,
-        description: "default",
+        description: "title-top",
+        position: "after-title",
+      },
+      title: "Card Title",
+      subtitle: "Layout Three Subtitle",
+      text:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dolorem vel voluptates!",
+      list: [],
+      links: ["Card Link"],
+      button: null,
+      cols: "col-xl-3",
+    },
+  ];
+  const cardsNoImage = [
+    {
+      title: "Special Card Title",
+      subtitle: null,
+      text:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, non?",
+      button: {
+        type: "block",
+        color: "primary",
+        text: "Go somewhere",
+      },
+      cols: "col-md-6",
+    },
+    {
+      title: "Special Card Title 2",
+      subtitle: null,
+
+      text:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, non?",
+      button: "Link to somewhere",
+      cols: "col-md-6",
+      button: {
+        type: "block",
+        color: "warning",
+        text: "Go somewhere",
       },
     },
   ];
@@ -59,7 +120,14 @@ const CardsPage = () => {
       </div>
       <div className="row">
         {cards.map((card, index) => (
-          <div className="col-xl-3" key={index}>
+          <div className={card.cols} key={index}>
+            <Card {...card} />
+          </div>
+        ))}
+      </div>
+      <div className="row mt-4">
+        {cardsNoImage.map((card, index) => (
+          <div className={card.cols} key={index}>
             <Card {...card} />
           </div>
         ))}
