@@ -11,10 +11,10 @@ const Header = () => {
         <div className="d-flex">
           <div className="navbar-logo">
             <a href="#" className="logo-light">
-              Customer Care
+              App Template
             </a>
             <a href="#" className="logo-dark">
-              Customer Care
+              App Template
             </a>
           </div>
         </div>

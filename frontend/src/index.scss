@@ -7,6 +7,7 @@
 @import "./page-header";
 @import "./card";
 @import "./button";
+@import "./alert";
 
 html,
 body {
@@ -305,4 +306,12 @@ simplebar-track.simplebar-vertical {
   font-size: 1.25rem;
   line-height: 1.45;
   vertical-align: middle;
+}
+.blockquote-f {
+  display: block;
+  font-size: 80%;
+  color: #74788d;
+  &::before {
+    content: "\2014\00A0";
+  }
 }

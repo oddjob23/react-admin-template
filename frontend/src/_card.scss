@@ -57,8 +57,9 @@
 }
 
 .card-link {
-  @include hover() {
+  &:hover {
     text-decoration: none;
+    color: darken($primary, 2) !important;
   }
 
   + .card-link {
@@ -72,7 +73,7 @@
 
 .card-header {
   padding: $card-spacer-y $card-spacer-x;
-  margin-bottom: 0; // Removes the default margin-bottom of <hN>
+  margin-bottom: 0;
   color: $card-cap-color;
   background-color: $card-cap-bg;
   border-bottom: $card-border-width solid $card-border-color;
@@ -103,10 +104,6 @@
   }
 }
 
-//
-// Header navs
-//
-
 .card-header-tabs {
   margin-right: -$card-spacer-x / 2;
   margin-bottom: -$card-spacer-y;
@@ -127,18 +124,18 @@
   bottom: 0;
   left: 0;
   padding: $card-img-overlay-padding;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  flex-shrink: 0; // For IE: https://github.com/twbs/bootstrap/issues/29396
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .card-img,
 .card-img-top {
-  //   @include border-top-radius($card-inner-border-radius);
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
@@ -278,5 +275,21 @@
       @include border-radius(0);
       margin-bottom: -$card-border-width;
     }
+  }
+}
+
+.border {
+  border: 1px solid #eff2f7 !important;
+  &-primary {
+    border-color: $primary !important;
+  }
+  &-success {
+    border-color: $success !important;
+  }
+  &-danger {
+    border-color: $danger !important;
+  }
+  &-info {
+    border-color: $info !important;
   }
 }
