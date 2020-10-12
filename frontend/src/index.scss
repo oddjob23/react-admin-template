@@ -224,6 +224,7 @@ body {
     }
   }
 }
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -314,4 +315,49 @@ simplebar-track.simplebar-vertical {
   &::before {
     content: "\2014\00A0";
   }
+}
+.button-icon-loading {
+  svg {
+    animation: spin 2s linear infinite;
+  }
+}
+.w-xs {
+  min-width: 80px;
+}
+.w-sm {
+  min-width: 95px;
+}
+.w-md {
+  min-width: 110px;
+}
+.w-lg {
+  min-width: 140px;
+}
+
+.w-xl {
+  min-width: 160px;
+}
+.bg-soft-primary {
+  background-color: rgba(85, 110, 230, 0.25) !important;
+}
+.avatar-box {
+  &-md {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+  &-title {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+  }
+  img {
+    height: 34px;
+  }
+}
+.profile-user-box {
+  margin-top: -25px;
 }

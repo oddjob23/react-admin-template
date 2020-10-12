@@ -265,6 +265,10 @@
               width: 100%;
               color: $white;
             }
+            a:link,
+            a:visited {
+              padding-left: 8px;
+            }
             .inner-icon {
               display: flex;
               max-width: 70px;

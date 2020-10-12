@@ -7,6 +7,7 @@ import img4 from "../../images/card_image_four.jpg";
 import img5 from "../../images/img_one.jpg";
 import img6 from "../../images/img_two.jpg";
 import img7 from "../../images/img_three.jpg";
+import PageTitle from "../PageTitle";
 const CardsPage = () => {
   const cards = [
     {
@@ -579,25 +580,7 @@ const CardsPage = () => {
   ];
   return (
     <>
-      <div className="row">
-        <div className="col-12">
-          <div className="page-title d-flex align-items-center justify-content-between">
-            <h4 className="mb-0 font-size-18">Cards</h4>
-            <div className="page-title-right">
-              <nav className="" aria-label="breadcrumb">
-                <ol className="breadcrumb m-0">
-                  <li className="breadcrumb-item">
-                    <a href="#">UI Elements</a>
-                  </li>
-                  <li className="active breadcrumb-item" aria-current="page">
-                    <a href="#r">Cards</a>
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageTitle title={"Cards"} link1={"UI Elements"} link2={"Cards"} />
       <div className="row">
         {cards.map((card, index) => (
           <div className={card.cols} key={index}>

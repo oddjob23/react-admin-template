@@ -8,10 +8,14 @@ import MainContent from "./components/MainContent";
 import CardsPage from "./components/pages/CardsPage";
 import AlertsPage from "./components/pages/AlertsPage";
 import ButtonsPage from "./components/pages/ButtonsPage";
+import FormPage from "./components/pages/FormPage";
+import LoginPage from "./components/pages/authentication/LoginPage";
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/login" component={LoginPage} />
+
         <div id="wrapper">
           <Header />
           <VerticalMenu />
@@ -20,6 +24,7 @@ function App() {
             <Route path="/ui-cards" component={CardsPage} />
             <Route path="/ui-alerts" component={AlertsPage} />
             <Route path="/ui-buttons" component={ButtonsPage} />
+            <Route path="/form-elements" component={FormPage} />
           </MainContent>
           <div className="settings-bar-overlay"></div>
           <Route path="/calendar">
