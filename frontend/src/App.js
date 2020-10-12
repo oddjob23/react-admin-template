@@ -7,6 +7,7 @@ import MainContent from "./components/MainContent";
 
 import CardsPage from "./components/pages/CardsPage";
 import AlertsPage from "./components/pages/AlertsPage";
+import ButtonsPage from "./components/pages/ButtonsPage";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
           <MainContent>
             <Route path="/ui-cards" component={CardsPage} />
             <Route path="/ui-alerts" component={AlertsPage} />
+            <Route path="/ui-buttons" component={ButtonsPage} />
           </MainContent>
           <div className="settings-bar-overlay"></div>
           <Route path="/calendar">
