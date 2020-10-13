@@ -10,11 +10,15 @@ import AlertsPage from "./components/pages/AlertsPage";
 import ButtonsPage from "./components/pages/ButtonsPage";
 import FormPage from "./components/pages/FormPage";
 import LoginPage from "./components/pages/authentication/LoginPage";
+import RegisterPage from "./components/pages/authentication/RegisterPage";
+
+import FormValidation from "./components/pages/FormValidation";
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
 
         <div id="wrapper">
           <Header />
@@ -25,6 +29,7 @@ function App() {
             <Route path="/ui-alerts" component={AlertsPage} />
             <Route path="/ui-buttons" component={ButtonsPage} />
             <Route path="/form-elements" component={FormPage} />
+            <Route path="/form-validation" component={FormValidation} />
           </MainContent>
           <div className="settings-bar-overlay"></div>
           <Route path="/calendar">

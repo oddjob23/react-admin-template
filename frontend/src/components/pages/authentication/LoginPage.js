@@ -35,7 +35,7 @@ const LoginPage = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [history, location, redirect]);
+  }, [history, location, redirect, userInfo]);
   return (
     <div className="account-page-wrapper my-5 pt-sm-5">
       <div className="container">
