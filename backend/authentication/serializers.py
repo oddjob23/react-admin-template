@@ -1,5 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from .models import User
 class CustomTokenPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -14,8 +15,8 @@ class CustomTokenPairSerializer(TokenObtainPairSerializer):
         return token
 
 class UserSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(required=True)
-    username = serializers.CharField(required=True)
+    email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all(), message="User with this e-mail address already exists")])
+    username = serializers.CharField(required=True, validators=[UniqueValidator(queryset=User.objects.all(), message="User with this username  already exists")])
     password = serializers.CharField(min_length=4, write_only=True)
     class Meta:
         model = User
@@ -28,5 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
         if password is not None:
             instance.set_password(password)
         instance.save()
+
         return instance
         

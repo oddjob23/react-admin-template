@@ -444,9 +444,15 @@ const VerticalMenu = ({ location }) => {
               active: false,
             },
             {
-              id: 2,
+              id: 4,
               label: "Create New",
               link: "project-new",
+              active: false,
+            },
+            {
+              id: 5,
+              label: "To-Do",
+              link: "todo",
               active: false,
             },
           ],

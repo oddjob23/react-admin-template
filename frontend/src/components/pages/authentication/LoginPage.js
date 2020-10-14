@@ -4,23 +4,53 @@ import loginIMG from "../../../images/loginImage.png";
 import loginFormImage from "../../../images/lgn.svg";
 import { Link } from "react-router-dom";
 import Button from "../../Button";
+import Input from "../../Input";
 
 import { login } from "../../../actions/userActions";
 const LoginPage = ({ location, history }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
+  const inputElement = {
+    type: "text",
+    name: "username",
+    label: "Username",
+    htmlFor: "username",
+    id: "username",
+    required: true,
+    tooltip: false,
+    placeholder: "Enter your username",
+    controlled: true,
+    invalidFeedback: "This field is required. Please enter a value",
+  };
+  const passwordElement = {
+    type: "password",
+    name: "password",
+    label: "Password",
+    id: "password",
+    htmlFor: "password",
+    required: true,
+    tooltip: false,
+    placeholder: "Enter password",
+    controlled: true,
+    invalidFeedback: "This field is required. Please enter a value",
+  };
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
   const dispatch = useDispatch();
-  const changeHandler = (e) => {
-    if (e.target.name === "username") {
-      setUsername(e.target.value);
-    } else if (e.target.name === "password") {
-      setPassword(e.target.value);
-    } else {
-      setRememberMe(Boolean(e.target.value));
+  const changeHandler = (value) => {
+    // if (e.target.name === "username") {
+    //   setUsername(e.target.value);
+    // } else if (e.target.name === "password") {
+    //   setPassword(e.target.value);
+    // } else {
+    //   setRememberMe(Boolean(e.target.value));
+    // }
+    if (value.username) {
+      setUsername(value.username);
+    }
+    if (value.password) {
+      setPassword(value.password);
     }
   };
   const submitHandler = (e) => {
@@ -73,7 +103,7 @@ const LoginPage = ({ location, history }) => {
                     className="form-horizontal"
                     onSubmit={submitHandler}
                   >
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <label htmlFor="username">Username</label>
                       <input
                         type="username"
@@ -85,20 +115,9 @@ const LoginPage = ({ location, history }) => {
                         placeholder="Enter your username"
                         onChange={changeHandler}
                       />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="password"
-                        name="password"
-                        required
-                        id="password"
-                        className="form-control"
-                        value={password}
-                        placeholder="Enter password"
-                        onChange={changeHandler}
-                      />
-                    </div>
+                    </div> */}
+                    <Input {...inputElement} handler={changeHandler} />
+                    <Input {...passwordElement} handler={changeHandler} />
                     <div className="custom-control custom-checkbox">
                       <input
                         type="checkbox"

@@ -13,6 +13,7 @@ import LoginPage from "./components/pages/authentication/LoginPage";
 import RegisterPage from "./components/pages/authentication/RegisterPage";
 
 import FormValidation from "./components/pages/FormValidation";
+import TodoPage from "./components/pages/TodoPage";
 function App() {
   return (
     <Router>
@@ -30,6 +31,7 @@ function App() {
             <Route path="/ui-buttons" component={ButtonsPage} />
             <Route path="/form-elements" component={FormPage} />
             <Route path="/form-validation" component={FormValidation} />
+            <Route path="/todo" component={TodoPage} />
           </MainContent>
           <div className="settings-bar-overlay"></div>
           <Route path="/calendar">

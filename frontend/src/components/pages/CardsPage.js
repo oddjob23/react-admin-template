@@ -91,7 +91,6 @@ const CardsPage = () => {
 
       text:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, non?",
-      button: "Link to somewhere",
       cols: "col-md-6",
       button: {
         type: "block",
@@ -123,7 +122,6 @@ const CardsPage = () => {
 
       text:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, non?",
-      button: "Link to somewhere",
       cols: "col-md-4",
       button: {
         type: "block",
