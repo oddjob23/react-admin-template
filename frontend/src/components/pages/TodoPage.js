@@ -1,81 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTitle from "../PageTitle";
 const TodoPage = () => {
-  let isDragging = false;
-  const todoList = [
+  const initialDnDState = {
+    draggedFrom: null,
+    draggedTo: null,
+    isDragging: false,
+    originalOrder: [],
+    updatedOrder: [],
+  };
+  let todoList = [
     {
       id: 1,
+      number: 1,
       title: "Todo Sample 1",
       completed: false,
       favourite: false,
     },
     {
       id: 2,
+      number: 2,
       title: "Todo Sample 2",
       completed: false,
       favourite: false,
     },
     {
       id: 3,
+      number: 3,
       title: "Todo Sample 3",
       completed: false,
       favourite: false,
     },
     {
       id: 4,
+      number: 4,
       title: "Todo Sample 4",
       completed: false,
       favourite: false,
     },
   ];
-  let cloned_list;
-  const cloneTable = () => {
-    const table = document.querySelector("table");
-    const rect = table.getBoundingClientRect();
-    const width = parseInt(window.getComputedStyle(table).width);
-    cloned_list = document.createElement("div");
-    cloned_list.style.position = "absolute";
-    cloned_list.style.left = `${rect.left}px`;
-    cloned_list.style.top = `${rect.top}px`;
+  const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
+  const [list, setList] = useState(todoList);
+  const handleDragStart = (e) => {
+    e.currentTarget.classList.add("dragging");
+    // define initial position where the DRAG event STARTED [ data-position ]
+    const initialPosition = Number(e.currentTarget.dataset.position);
 
-    table.parentNode.insertBefore(cloned_list, table);
-    table.style.visibility = "hidden";
-
-    table.querySelectorAll("tr").forEach((row) => {
-      const item = document.createElement("div");
-      const newTable = document.createElement("table");
-      newTable.classList.add("table");
-      const newRow = document.createElement("tr");
-
-      const cells = [].slice.call(row.children);
-      cells.forEach((cell) => {
-        const newCell = cell.cloneNode(true);
-        newRow.appendChild(newCell);
-      });
-
-      newTable.appendChild(newRow);
-      item.appendChild(newTable);
-      cloned_list.appendChild(item);
+    // update Drag and Drop state with new information - draggedFrom is initial position
+    setDragAndDrop({
+      ...dragAndDrop,
+      draggedFrom: initialPosition,
+      isDragging: true,
+      originalOrder: list,
     });
-  };
-  const mouseDownHandler = (e) => {
-    const el = e.target;
-    console.log("mouse down on move icon");
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", mouseUpHandler);
-  };
 
-  const mouseMoveHandler = () => {
-    console.log("mouse is moving");
-    if (!isDragging) {
-      isDragging = true;
+    // implemented for the firefox, check data transfer API for more info
+    e.dataTransfer.setData("text/html", "");
+  };
+  const onDragOverHandler = (e) => {
+    e.preventDefault();
+    // copy the original order list
+    let newList = dragAndDrop.originalOrder;
 
-      cloneTable();
+    // extract dragged from - from the state
+    const draggedFrom = dragAndDrop.draggedFrom;
+
+    // dragged to is above current target - data position attribute
+    const draggedTo = Number(e.currentTarget.dataset.position);
+    // get the item dragged from the list with the index [draggedFrom] (the item dragged)
+    const itemDragged = newList[draggedFrom];
+    // filter out the elements that are not being dragged
+    const remainingItems = newList.filter(
+      (item, index) => index !== draggedFrom
+    );
+
+    // add remaining items from 0 to element that's dragged
+    /**
+     *  if element dragged over is with index of 2 then remaining list woould be list[0, 1, 2]
+     */
+    // add dragged item in that list (changing the order)
+    // remaining items are now left to the index of the dragged to
+    newList = [
+      ...remainingItems.slice(0, draggedTo),
+      itemDragged,
+      ...remainingItems.slice(draggedTo),
+    ];
+    // check if the targets are actually different (event fires every 100ms)
+    if (draggedTo !== dragAndDrop.draggedTo) {
+      setDragAndDrop({
+        ...dragAndDrop,
+        updatedOrder: newList,
+        draggedTo: draggedTo,
+      });
     }
   };
-  const mouseUpHandler = () => {
-    document.removeEventListener("mousemove", mouseMoveHandler);
-    document.removeEventListener("mouseup", mouseUpHandler);
+  const onDropHandler = (e) => {
+    setList(dragAndDrop.updatedOrder);
+    //reset the state of drag and drop
+
+    setDragAndDrop({
+      ...dragAndDrop,
+      draggedFrom: null,
+      draggedTo: null,
+      isDragging: false,
+    });
+    e.currentTarget.classList.remove("dragging");
+    e.currentTarget.classList.remove("over");
+  };
+
+  const onDragEnterHandler = (e) => {
+    e.currentTarget.classList.add("over");
+  };
+  const onDragLeaveHandler = (e) => {
+    e.currentTarget.classList.remove("over");
   };
   return (
     <>
@@ -89,8 +125,16 @@ const TodoPage = () => {
               <div className="table-responsive">
                 <table className="table table-nowrap table-borderless table-centered mb-0">
                   <tbody>
-                    {todoList.map((el) => (
-                      <tr>
+                    {list.map((el, index) => (
+                      <tr
+                        draggable={true}
+                        onDragStart={handleDragStart}
+                        onDrop={onDropHandler}
+                        onDragOver={onDragOverHandler}
+                        data-position={index}
+                        onDragEnter={onDragEnterHandler}
+                        onDragLeave={onDragLeaveHandler}
+                      >
                         <td width="60px">
                           <div className="custom-control custom-checkbox">
                             <input
@@ -113,10 +157,7 @@ const TodoPage = () => {
                           </h5>
                         </td>
                         <td>
-                          <span
-                            className="todos-actions move"
-                            onMouseDown={mouseDownHandler}
-                          >
+                          <span className="todos-actions move">
                             <svg
                               width="1em"
                               height="1em"

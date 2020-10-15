@@ -366,3 +366,11 @@ simplebar-track.simplebar-vertical {
 .profile-user-box {
   margin-top: -25px;
 }
+
+.over {
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+.dragging {
+  opacity: 1 !important;
+}
