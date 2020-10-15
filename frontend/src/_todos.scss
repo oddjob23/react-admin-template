@@ -2,9 +2,15 @@
   color: rgb(216, 220, 235);
   transition: all 0.2s ease-in;
   display: block;
+  &:not(:last-child) {
+    margin-right: 22px;
+  }
   svg {
     cursor: pointer;
     font-size: 16px;
+  }
+  &.move {
+    cursor: grab;
   }
   &:hover {
     color: darken(rgb(216, 220, 235), 40);
@@ -17,4 +23,9 @@
       }
     }
   }
+}
+
+.dragging {
+  z-index: 9999;
+  cursor: move;
 }

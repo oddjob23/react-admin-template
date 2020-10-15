@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     # local
-    'authentication'
+    'authentication',
+    'todos',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
